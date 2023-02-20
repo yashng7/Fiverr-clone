@@ -1,10 +1,13 @@
-import React from 'react'
-import './Home.scss'
+import React from "react";
+import Featured from "../../components/featured/Featured";
+import "./Home.scss";
 
-const home = () => {
+const Home = () => {
   return (
-    <div>home</div>
-  )
-}
+    <div>
+      <Featured />
+    </div>
+  );
+};
 
-export default home
+export default Home;
