@@ -1,9 +1,17 @@
-import React from 'react'
-import './Slide.scss'
-const Slide = () => {
-  return (
-    <div>Slide</div>
-  )
-}
+import React from "react";
+import "./Slide.scss";
+import Slider from "infinite-react-carousel";
 
-export default Slide
+const Slide = ({ children, slidesToShow, arrowsScroll }) => {
+  return (
+    <div className="slide">
+      <div className="container">
+        <Slider dots slidesToShow={slidesToShow} arrowsScroll={arrowsScroll}>
+          {children}
+        </Slider>
+      </div>
+    </div>
+  );
+};
+
+export default Slide;
