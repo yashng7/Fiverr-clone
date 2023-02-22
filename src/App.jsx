@@ -12,7 +12,7 @@ import Add from "./pages/add/Add";
 import Orders from "./pages/orders/Orders";
 import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
-import MyGigs from "./pages/myGigs/MyGigs";
+import MyGigs from "./pages/mygigs/MyGigs";
 
 const App = () => {
   const Layout = () => {
@@ -46,8 +46,8 @@ const App = () => {
           element: <Orders />,
         },
         {
-          path: "/myGigs",
-          element: <myGigs />,
+          path: "/mygigs",
+          element: <MyGigs />,
         },
         {
           path: "/add",
