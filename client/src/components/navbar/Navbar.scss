@@ -1,3 +1,4 @@
+@import "../../styles/media-queries";
 .navbar {
   position: sticky;
   top: 0;
@@ -14,7 +15,7 @@
     color: black;
   }
   .container {
-    width: 1400px;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-around;
