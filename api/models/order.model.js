@@ -1,39 +1,44 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const userSchema = new Schema(
+const OrderSchema = new Schema(
   {
-    username: {
+    gigId: {
       type: String,
       required: true,
-      unique: true,
     },
     img: {
       type: String,
       required: false,
     },
-    password: {
+    title: {
       type: String,
       required: true,
     },
-    country: {
+    price: {
+      type: Number,
+      required: true,
+    },
+    sellerId: {
       type: String,
       required: true,
     },
-    phone: {
-      type: String,
-      required: false,
-    },
-    desc: {
+    buyerId: {
       type: String,
       required: true,
     },
-    isSeller: {
+    isCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    payment_intent: {
       type: String,
-      required: false,
+      required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-export default mongoose.model("User", userSchema);
+export default mongoose.model("Order", OrderSchema);
