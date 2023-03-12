@@ -8,6 +8,11 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     img: {
       type: String,
       required: false,
@@ -26,7 +31,7 @@ const userSchema = new Schema(
     },
     desc: {
       type: String,
-      required: true,
+      required: false,
     },
     isSeller: {
       type: String,
