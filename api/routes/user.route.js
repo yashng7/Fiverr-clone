@@ -1,5 +1,8 @@
 import express from "express";
-const router = express.Router();
+import { deleteUser } from "../controllers/user.controller.js";
+import { verifyToken } from "../midelware/jwt.js";
 
+const router = express.Router();
+router.delete("/:id", verifyToken, deleteUser);
 
 export default router;
