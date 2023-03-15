@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-// import upload from "../../utils/upload";
 import "./Register.scss";
-import newRequest from "../../../utils/newRequest";
 import { useNavigate } from "react-router-dom";
+import upload from "../../../utils/upload.js";
+import newRequest from "../../../utils/newRequest.js";
 
 function Register() {
   const [file, setFile] = useState(null);
@@ -38,7 +38,7 @@ function Register() {
         ...user,
         img: url,
       });
-      navigate("/")
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -52,7 +52,7 @@ function Register() {
           <input
             name="username"
             type="text"
-            placeholder="username"
+            placeholder="johndoe"
             onChange={handleChange}
           />
           <label htmlFor="">Email</label>
