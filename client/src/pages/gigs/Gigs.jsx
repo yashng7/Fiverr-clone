@@ -1,16 +1,40 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Gigs.scss";
-import { gigs } from "../../data";
+
 import GigCard from "../../components/gigCard/GigCard";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../../utils/newRequest";
+import { useLocation } from "react-router-dom";
 
 const Gigs = () => {
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("sales");
+  const minRef = useRef();
+  const maxRef = useRef();
+
+  const { search } = useLocation();
+
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["gigs"],
+    queryFn: () =>
+      newRequest
+        .get(
+          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}`
+        )
+        .then((res) => {
+          return res.data;
+        }),
+  });
+  console.log(data);
+  const apply = () => {
+    refetch();
+  };
 
   const reSort = (type) => {
     setSort(type);
     setOpen(false);
   };
+
   return (
     <div className="gigs">
       <div className="container">
@@ -22,9 +46,9 @@ const Gigs = () => {
         <div className="menu">
           <div className="left">
             <span>Budget</span>
-            <input type="text" placeholder="min" />
-            <input type="text" placeholder="max" />
-            <button>Apply</button>
+            <input ref={minRef} type="number" placeholder="min" />
+            <input ref={maxRef} type="number" placeholder="max" />
+            <button onClick={apply}>Apply</button>
           </div>
           <div className="right">
             <span className="sortBy">Sort By</span>
@@ -45,9 +69,11 @@ const Gigs = () => {
           </div>
         </div>
         <div className="cards">
-          {gigs.map((gig) => (
-            <GigCard key={gig.id} item={gig} />
-          ))}
+          {isLoading
+            ? "loading"
+            : error
+            ? "something went wrong"
+            : data.map((gig) => <GigCard key={gig._id} item={gig} />)}
         </div>
       </div>
     </div>
