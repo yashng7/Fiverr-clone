@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Gigs.scss";
 
 import GigCard from "../../components/gigCard/GigCard";
@@ -19,7 +19,7 @@ const Gigs = () => {
     queryFn: () =>
       newRequest
         .get(
-          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}`
+          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sort}`
         )
         .then((res) => {
           return res.data;
@@ -34,6 +34,10 @@ const Gigs = () => {
     setSort(type);
     setOpen(false);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [sort]);
 
   return (
     <div className="gigs">
@@ -63,7 +67,7 @@ const Gigs = () => {
                 ) : (
                   <span onClick={() => reSort("sales")}>Best Selling</span>
                 )}
-                <span onClick={() => reSort("sales")}>Popular</span>
+                <span onClick={() => reSort("price")}>Popular</span>
               </div>
             )}
           </div>
