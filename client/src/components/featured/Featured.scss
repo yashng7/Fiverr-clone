@@ -1,3 +1,4 @@
+@import "../../styles/media-queries.scss";
 .featured {
   height: 600px;
   display: flex;
@@ -42,7 +43,7 @@
             margin: 10px;
           }
 
-          input{
+          input {
             width: 100%;
             border: none;
             outline: none;
