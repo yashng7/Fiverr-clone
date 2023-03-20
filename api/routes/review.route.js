@@ -1,4 +1,5 @@
 import express from "express";
+import { verifyToken } from "../midelware/jwt.js";
 import {
   createReview,
   getReview,
@@ -8,7 +9,7 @@ import {
 const router = express.Router();
 
 router.post("/", verifyToken, createReview);
-router.get("/:id", getReview);
+router.get("/:gigId", getReview);
 router.post("/:id", deleteReview);
 
 export default router;
