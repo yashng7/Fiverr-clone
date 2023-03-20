@@ -42,7 +42,7 @@ const Reviews = ({ gigId }) => {
         : data.map((review) => <Review key={review._id} review={review} />)}
       <div className="add">
         <h3>Add a review</h3>
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" className="addFrom" onSubmit={handleSubmit}>
           <input type="text" placeholder="give a star to this gig" />
           <select name="" id="">
             <option value={1}>1</option>
