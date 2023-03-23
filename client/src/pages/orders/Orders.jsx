@@ -55,10 +55,13 @@ const Orders = () => {
             {data.map((order) => (
               <tr key={order._id}>
                 <td>
-                  <img className="image" src={order.img} alt="" />
+                  <Link to={`/gig/${order.gigId}`} className="link">
+                    <img className="image" src={order.img} alt="" />
+                  </Link>
                 </td>
                 <td>{order.title}</td>
                 <td>{order.price}</td>
+
                 <td>
                   <img
                     className="message"
