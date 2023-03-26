@@ -1,5 +1,8 @@
 import React, { useReducer, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { gigReducer, INITIAL_STATE } from "../../reducers/gigReducer";
+import { useMutation } from "@tanstack/react-query";
+import newRequest from "../../../utils/newRequest.js";
 import "./Add.scss";
 import upload from "../../../utils/upload.js";
 
@@ -31,10 +34,24 @@ const Add = () => {
     e.target[0].value = "";
   };
 
+  const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: (gig) => {
+      return newRequest.post("/gigs", gig);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myGigs"]);
+    },
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     mutation.mutate(state);
-    // navigate("/mygigs")
+  };
+  const handleGigs = (e) => {
+    e.preventDefault();
+    navigate("/mygigs");
   };
 
   const handleUpload = async () => {
@@ -102,6 +119,7 @@ const Add = () => {
               onChange={handleChange}
             ></textarea>
             <button onClick={handleSubmit}>Create</button>
+            <button onClick={handleGigs}>Show MyGigs</button>
           </div>
           <div className="details">
             <label htmlFor="">Service Title</label>
@@ -138,7 +156,8 @@ const Add = () => {
                 <div className="item" key={feature}>
                   <span>
                     {feature}
-                    <button className="removeFeatures"
+                    <button
+                      className="removeFeatures"
                       onClick={() =>
                         dispatch({ type: "REMOVE_FEATURE", payload: feature })
                       }
