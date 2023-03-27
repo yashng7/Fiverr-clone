@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../midelware/jwt.js";
+import { verifyToken } from "../middleware/jwt.js";
 import {
   createReview,
   getReview,

@@ -5,7 +5,7 @@ import {
   getSingleConversation,
   updateConversation,
 } from "../controllers/conversation.controller.js";
-import { verifyToken } from "../midelware/jwt.js";
+import { verifyToken } from "../middleware/jwt.js";
 
 const router = express.Router();
 router.get("/", verifyToken, getConversations);
