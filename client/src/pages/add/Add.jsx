@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { gigReducer, INITIAL_STATE } from "../../reducers/gigReducer.js";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { gigReducer, INITIAL_STATE } from "../../reducers/gigReducer";
+import { useMutation } from "@tanstack/react-query";
 import newRequest from "../../../utils/newRequest.js";
 import "./Add.scss";
 import upload from "../../../utils/upload.js";
@@ -34,25 +34,7 @@ const Add = () => {
     e.target[0].value = "";
   };
 
-  const handleUpload = async () => {
-    setUploading(true);
-    try {
-      const cover = await upload(singleFile);
-      const images = await Promise.all(
-        [...files].map(async (file) => {
-          const url = await upload(file);
-          return url;
-        })
-      );
-      setUploading(false);
-      dispatch({ type: "ADD_IMAGES", payload: { cover, images } });
-    } catch (err) {
-      console.log(err);
-    }
-  };
   const navigate = useNavigate();
-
-  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (gig) => {
@@ -70,6 +52,23 @@ const Add = () => {
   const handleGigs = (e) => {
     e.preventDefault();
     navigate("/mygigs");
+  };
+
+  const handleUpload = async () => {
+    setUploading(true);
+    try {
+      const cover = await upload(singleFile);
+      const images = await Promise.all(
+        [...files].map(async (file) => {
+          const url = await upload(file);
+          return url;
+        })
+      );
+      setUploading(false);
+      dispatch({ type: "ADD_IMAGES", payload: { cover, images } });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -120,7 +119,7 @@ const Add = () => {
               onChange={handleChange}
             ></textarea>
             <button onClick={handleSubmit}>Create</button>
-            {/* <button onClick={handleGigs}>Show MyGigs</button> */}
+            <button onClick={handleGigs}>Show MyGigs</button>
           </div>
           <div className="details">
             <label htmlFor="">Service Title</label>
