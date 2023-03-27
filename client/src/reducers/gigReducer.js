@@ -12,6 +12,7 @@ export const INITIAL_STATE = {
   features: [],
   price: 0,
 };
+
 export const gigReducer = (state, action) => {
   switch (action.type) {
     case "CHANGE_INPUT":
@@ -23,7 +24,7 @@ export const gigReducer = (state, action) => {
       return {
         ...state,
         cover: action.payload.cover,
-        images: action.payload.cover,
+        images: action.payload.images,
       };
     case "ADD_FEATURE":
       return {
@@ -37,6 +38,7 @@ export const gigReducer = (state, action) => {
           (feature) => feature !== action.payload
         ),
       };
+
     default:
       return state;
   }
