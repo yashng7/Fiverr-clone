@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import getCurrentUser from "../../../utils/getCurrentUser";
 import newRequest from "../../../utils/newRequest";
+import DehazeRoundedIcon from "@mui/icons-material/DehazeRounded";
+import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 
 import "./Navbar.scss";
 
@@ -21,7 +24,7 @@ function Navbar() {
     };
   }, []);
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = getCurrentUser();
 
   const navigate = useNavigate();
 
@@ -39,16 +42,22 @@ function Navbar() {
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
+          <DehazeRoundedIcon className="bars" />
           <Link className="link" to="/">
             <span className="text">fiverr</span>
           </Link>
           <span className="dot">.</span>
         </div>
         <div className="links">
-          <span>Fiverr Business</span>
-          <span>Explore</span>
-          <span>English</span>
-          {!currentUser?.isSeller && <span>Become a Seller</span>}
+          <span className="links-hide">Fiverr Business</span>
+          <span className="links-hide">Explore</span>
+          <span className="links-hide globe">
+            <LanguageRoundedIcon />
+            English
+          </span>
+          {!currentUser?.isSeller && (
+            <span className="links-hide">Become a Seller</span>
+          )}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
               <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
@@ -79,7 +88,9 @@ function Navbar() {
             </div>
           ) : (
             <>
-              <Link to="/login" className="link">Sign in</Link>
+              <Link to="/login" className="link mobile-screen">
+                Sign in
+              </Link>
               <Link className="link" to="/register">
                 <button>Join</button>
               </Link>
