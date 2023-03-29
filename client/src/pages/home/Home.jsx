@@ -6,16 +6,31 @@ import Slide from "../../components/slide/Slide";
 import CatCard from "../../components/catCard/CatCard";
 import ProjectCard from "../../components/projectCard/ProjectCard";
 import { cards, projects } from "../../data";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../../utils/newRequest";
 const Home = () => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["gigs"],
+    queryFn: () =>
+      newRequest.get("/gigs").then((res) => {
+        return res.data.slice(0, 10);
+      }),
+  });
   return (
     <div className="Home">
       <Featured />
       <TrustedBy />
-      <Slide slidesToShow={5} arrowsScroll={5}>
-        {cards.map((card) => (
-          <CatCard key={card.id} card={card} />
-        ))}
-      </Slide>
+      {isLoading ? (
+        "loading"
+      ) : error ? (
+        "Something went wrong"
+      ) : (
+        <Slide slidesToShow={5} arrowsScroll={5}>
+          {data.map((card) => (
+            <CatCard key={card._id} card={card} />
+          ))}
+        </Slide>
+      )}
       <div className="features">
         <div className="container">
           <div className="item">
