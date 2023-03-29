@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { gigReducer, INITIAL_STATE } from "../../reducers/gigReducer";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import newRequest from "../../../utils/newRequest.js";
 import "./Add.scss";
 import upload from "../../../utils/upload.js";
@@ -35,6 +35,7 @@ const Add = () => {
   };
 
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (gig) => {
@@ -86,6 +87,7 @@ const Add = () => {
             />
             <label htmlFor="">Category</label>
             <select name="cat" id="cat" onChange={handleChange}>
+              <option value="">select</option>
               <option value="design">Design</option>
               <option value="web">Web Development</option>
               <option value="animation">Animation</option>
