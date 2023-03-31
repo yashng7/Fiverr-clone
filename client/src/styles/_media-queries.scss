@@ -23,6 +23,11 @@
     @content;
   }
 }
+@mixin hide-slider {
+  @media only screen and (max-width: 640px) {
+    @content;
+  }
+}
 
 @mixin tablet {
   @media only screen and (min-width: 768px) {
