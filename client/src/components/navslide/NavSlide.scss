@@ -1,0 +1,29 @@
+@import "../../styles/media-queries.scss";
+.slider {
+  width: 100%;
+  @include hide-slider {
+    display: none;
+  }
+  display: flex;
+  align-items: center;
+  .arrow {
+    @include large {
+      display: none;
+    }
+  }
+
+  .slider-items {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    @include tablet {
+      gap: 10px;
+    }
+
+    .slider-item {
+      font-weight: 700;
+    }
+  }
+}
