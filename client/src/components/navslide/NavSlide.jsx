@@ -7,15 +7,17 @@ import { links } from "../../data.js";
 const Navslide = () => {
   const [data, setData] = useState(links);
   const [startIndex, setStartIndex] = useState(0);
-  const [numItems, setNumItems] = useState(5);
-  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const [numItems, setNumItems] = useState(4);
 
   useEffect(() => {
     const handleResize = () => {
-      if (innerWidth >= 1400) {
+      const windowWidth = window.innerWidth;
+      if (windowWidth >= 1400) {
         setNumItems(10);
-      } else if (innerWidth <= 1024) {
+      } else if (windowWidth < 1024) {
         setNumItems(5);
+      } else if (windowWidth < 768) {
+        setNumItems(4);
       }
     };
 
@@ -24,7 +26,7 @@ const Navslide = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [innerWidth]);
+  }, []);
 
   // Calculate the end index based on the start index
   const endIndex = startIndex + numItems;
