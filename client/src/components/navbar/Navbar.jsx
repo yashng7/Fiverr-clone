@@ -4,12 +4,17 @@ import getCurrentUser from "../../../utils/getCurrentUser";
 import newRequest from "../../../utils/newRequest";
 import DehazeRoundedIcon from "@mui/icons-material/DehazeRounded";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import CurrencyRupeeRoundedIcon from "@mui/icons-material/CurrencyRupeeRounded";
 
 import "./Navbar.scss";
+import NavSlide from "../navslide/NavSlide";
+
 
 function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const { pathname } = useLocation();
 
@@ -41,8 +46,51 @@ function Navbar() {
   return (
     <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
+        {openMenu && (
+          <div className="side-menu">
+            <div className="menu-container">
+              <div className="button-container">
+                <button>Join Fiverr</button>
+                <CloseRoundedIcon
+                  className="close"
+                  onClick={() => setOpenMenu(!openMenu)}
+                />
+              </div>
+              <div className="menu-content">
+                <span>
+                  <Link to="/login" className="link">
+                    Sign in
+                  </Link>
+                </span>
+                <span>Browse Categories</span>
+                <span>Explore</span>
+                <span>
+                  <span className="green">Fiverr Business</span>
+                </span>
+              </div>
+              <hr />
+              <div className="menu-content">
+                <span>
+                  <span className="dark">General</span>
+                </span>
+                <span>Home</span>
+                <span className="icon-center">
+                  English
+                  <LanguageRoundedIcon />
+                </span>
+                <span className="icon-center">
+                  <CurrencyRupeeRoundedIcon />
+                  INR
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="logo">
-          <DehazeRoundedIcon className="bars" />
+          <DehazeRoundedIcon
+            className="bars"
+            onClick={() => setOpenMenu(!openMenu)}
+          />
           <Link className="link" to="/">
             <span className="text">fiverr</span>
           </Link>
@@ -102,33 +150,7 @@ function Navbar() {
         <>
           <hr />
           <div className="menu">
-            <Link className="link menuLink" to="/">
-              Graphics & Design
-            </Link>
-            <Link className="link menuLink" to="/">
-              Video & Animation
-            </Link>
-            <Link className="link menuLink" to="/">
-              Writing & Translation
-            </Link>
-            <Link className="link menuLink" to="/">
-              AI Services
-            </Link>
-            <Link className="link menuLink" to="/">
-              Digital Marketing
-            </Link>
-            <Link className="link menuLink" to="/">
-              Music & Audio
-            </Link>
-            <Link className="link menuLink" to="/">
-              Programming & Tech
-            </Link>
-            <Link className="link menuLink" to="/">
-              Business
-            </Link>
-            <Link className="link menuLink" to="/">
-              Lifestyle
-            </Link>
+            <NavSlide />
           </div>
           <hr />
         </>
