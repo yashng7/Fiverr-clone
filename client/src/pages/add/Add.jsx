@@ -92,6 +92,8 @@ const Add = () => {
               <option value="web">Web Development</option>
               <option value="animation">Animation</option>
               <option value="music">Music</option>
+              <option value="voice">Voice over</option>
+              <option value="education">Education</option>
             </select>
             <div className="images">
               <div className="imagesInputs">
