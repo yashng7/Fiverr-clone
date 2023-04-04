@@ -87,13 +87,20 @@
 
     display: flex;
     .logo {
-      font-size: 34px;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
       font-weight: bold;
       .bars {
         margin-right: 20px;
         cursor: pointer;
         @include large {
           display: none;
+        }
+      }
+      span {
+        @include tablet {
+          font-size: 34px;
         }
       }
 
@@ -124,13 +131,15 @@
         gap: 10px;
       }
       .links-hide {
-        @include laptop-hide {
-          display: none;
+        display: none;
+        @include laptop {
+          display: flex;
         }
       }
       .mobile-screen {
-        @include mobile-hide {
-          display: none;
+        display: none;
+        @include mobile-large {
+          display: flex;
         }
       }
 
@@ -149,6 +158,10 @@
         }
         span {
           text-transform: capitalize;
+          display: none;
+          @include mobile-small {
+            display: block;
+          }
         }
 
         .options {
@@ -194,9 +207,12 @@
   .menu {
     max-width: 1400px;
     margin: 0 auto;
-    display: flex;
+    display: none;
     height: 50px;
     color: gray;
     font-family: "Montserrat", sans-serif;
+    @include tablet {
+      display: flex;
+    }
   }
 }
