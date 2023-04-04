@@ -1,24 +1,33 @@
 @import "../../styles/media-queries.scss";
 .featured {
-  height: 600px;
   display: flex;
-  justify-content: center;
+  min-height: 500px;
   background-color: #013914;
   color: white;
+  padding-bottom: 10px;
+
+  @include mobile-small {
+    font-size: 50px;
+  }
 
   .container {
-    width: 1400px;
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
 
     .left {
+      padding: 0 20px;
       display: flex;
       flex-direction: column;
       gap: 30px;
 
       h1 {
-        font-size: 50px;
-
+        font-size: 40px;
+        text-align: center;
+        @include mobile-medium {
+          font-size: 50px;
+        }
         span {
           font-style: italic;
           font-weight: 300;
@@ -26,17 +35,32 @@
       }
 
       .search {
-        background-color: white;
-        border-radius: 5px;
+        padding: 5px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-between;
         overflow: hidden;
+        gap: 10px;
+        @include tablet {
+          flex-direction: row;
+          background-color: white;
+          border-radius: 5px;
+          padding: 0;
+        }
 
         .searchInput {
+          width: 100%;
+          height: 50px;
           display: flex;
           align-items: center;
-          gap: 10px;
+          background-color: white;
+          justify-content: flex-start;
+          border-radius: 5px;
+          @include tablet {
+            flex: 2;
+          }
+
           img {
             width: 20px;
             height: 20px;
@@ -44,10 +68,10 @@
           }
 
           input {
-            width: 100%;
             border: none;
             outline: none;
-
+            flex: 1;
+            font-size: 16px;
             &::placeholder {
               color: rgb(53, 52, 52);
             }
@@ -55,42 +79,55 @@
         }
 
         button {
-          width: 120px;
           height: 50px;
           border: none;
           background-color: #1dbf73;
           color: white;
           align-self: flex-end;
           cursor: pointer;
+          width: 100%;
+          border-radius: 5px;
+          @include tablet {
+            flex: 1;
+            border-radius: 0;
+          }
         }
       }
 
       .popular {
-        display: flex;
+        display: none;
         align-items: center;
         gap: 10px;
+        font-size: 16px;
+        flex-wrap: wrap;
+        @include tablet {
+          display: flex;
+        }
 
         span {
-          width: max-content;
         }
 
         button {
-          width: max-content;
           color: white;
           border: 1px solid white;
           padding: 5px 10px;
           border-radius: 20px;
           background-color: transparent;
-          font-size: 14px;
+
+          @include mobile-small {
+          }
         }
       }
     }
 
     .right {
+      width: 100%;
       height: 100%;
-      img {
-        height: 100%;
-        object-fit: contain;
+      background-image: url("./img/man.png");
+      padding-right: 20px;
+      display: none;
+      @include tablet {
+        display: flex;
       }
     }
   }
