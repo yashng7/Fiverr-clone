@@ -1,21 +1,33 @@
+@import "../../styles/media-queries.scss";
 .trustedBy {
-  height: 100px;
+  height: 70px;
   display: flex;
   justify-content: center;
   background-color: rgb(235, 235, 235);
+  @include mobile-large{
+    height: 100px;
+  }
+
   .container {
-    width: 760px;
+    max-width: 760px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
     span {
+      display: none;
       color: gray;
       font-weight: bold;
+      @include large {
+        display: flex;
+      }
     }
     img {
-      height: 50px;
+      height: 30px;
       object-fit: contain;
+      @include mobile-large{
+        height: 50px;
+      }
     }
   }
 }
