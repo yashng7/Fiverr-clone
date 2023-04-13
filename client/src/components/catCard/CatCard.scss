@@ -1,5 +1,6 @@
+@import "../../styles/media-queries.scss";
 .catCard {
-  width: 252px;
+  max-width: 280px;
   height: 344px;
   color: white;
   border-radius: 5px;
