@@ -1,11 +1,14 @@
+@import "../../styles/media-queries.scss";
 .slide {
   display: flex;
   justify-content: center;
   padding: 100px 0px;
+  position: relative;
 
   .container {
     width: 1400px;
     position: relative;
+    left: 25px;
   }
 
   .carousel-initialized {
@@ -27,5 +30,10 @@
 
   .carousel-prev {
     left: -25px;
+  }
+  .carousel-next {
+    @include tablet {
+      right: 25px;
+    }
   }
 }
