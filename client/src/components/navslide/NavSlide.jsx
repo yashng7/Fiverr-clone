@@ -12,9 +12,9 @@ const Navslide = () => {
   useEffect(() => {
     const handleResize = () => {
       const windowWidth = window.innerWidth;
-      if (windowWidth >= 1400) {
-        setNumItems(10);
-      } else if (windowWidth < 1024) {
+      if (windowWidth >= 1080) {
+        setNumItems(data.length);
+      } else if (windowWidth <= 1024) {
         setNumItems(5);
       } else if (windowWidth < 768) {
         setNumItems(4);
