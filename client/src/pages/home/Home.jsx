@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.scss";
 import Featured from "../../components/featured/Featured";
 import TrustedBy from "../../components/trustedBy/TrustedBy";
@@ -9,6 +9,7 @@ import { cards, projects } from "../../data";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../../utils/newRequest";
 const Home = () => {
+  const [num, setNum] = useState(5);
   const { isLoading, error, data } = useQuery({
     queryKey: ["gigs"],
     queryFn: () =>
@@ -16,6 +17,26 @@ const Home = () => {
         return res.data.slice(0, 10);
       }),
   });
+
+  useEffect(() => {
+    function handleResize() {
+      const windowWidth = window.innerWidth;
+
+      if (windowWidth < 600) {
+        setNum(1);
+      } else if (windowWidth < 769) {
+        setNum(2);
+      } else if (windowWidth < 1280) {
+        setNum(3);
+      } else {
+        setNum(5);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="Home">
       <Featured />
@@ -25,7 +46,7 @@ const Home = () => {
       ) : error ? (
         "Something went wrong"
       ) : (
-        <Slide slidesToShow={5} arrowsScroll={5}>
+        <Slide slidesToShow={num} arrowsScroll={num}>
           {data.map((card) => (
             <CatCard key={card._id} card={card} />
           ))}

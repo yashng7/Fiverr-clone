@@ -34,7 +34,7 @@
       }
     }
     .container {
-      width: 1400px;
+      max-width: 1400px;
       display: flex;
       align-items: center;
       gap: 200px;
@@ -74,7 +74,7 @@
           }
         }
         video {
-          width: 768px;
+          width: 0px; //remove
         }
       }
     }
